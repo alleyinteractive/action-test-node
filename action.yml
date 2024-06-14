@@ -1,5 +1,8 @@
 name: 'Run node tests'
 description: 'Setup Node environment and run install, audit, test, and build commands'
+branding:
+  icon: 'package'
+  color: 'green'
 inputs:
   node-version:
     description: 'Node.js version to use'
