@@ -17,7 +17,7 @@ inputs:
     required: false
     default: '.'
   cache-dependency-path:
-    description: 'Path to the dependency file to use for caching'
+    description: 'Path to the dependency file to use for caching (relative to working-directory)'
     required: false
     default: 'package-lock.json'
   install-skip:
@@ -56,11 +56,20 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Setup environment variable for cache dependency path
+      run: |
+        if [ "${{ inputs.working-directory }}" != "." ]; then
+          echo "CACHE_DEPENDENCY_PATH=${{ inputs.working-directory }}/${{ inputs.cache-dependency-path }}" >> $GITHUB_ENV
+        else
+          echo "CACHE_DEPENDENCY_PATH=${{ inputs.cache-dependency-path }}" >> $GITHUB_ENV
+        fi
+      shell: bash
+
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
-        cache-dependency-path: ${{ inputs.cache-dependency-path }}
+        cache-dependency-path: ${{ env.CACHE_DEPENDENCY_PATH }}
 
     - name: Install npm
       if: ${{ inputs.npm-version }}

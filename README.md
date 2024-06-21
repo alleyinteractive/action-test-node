@@ -60,7 +60,7 @@ jobs:
 
 ### `cache-dependency-path`
 
-- Specify the path to the dependency file to use for caching.
+- Specify the path to the dependency file to use for caching; note that this path is relative to the `working-directory`.
 - Accepts a string.
 - Defaults to `package-lock.json`.
 
