@@ -30,7 +30,7 @@ jobs:
         node: 'lts/*'
         working-directory: './src'
         cache-dependency-path: './src/package-lock.json'
-        skip-audit: 'true'
+        audit-skip: 'true'
         test-command: 'npm run test:ci && npm run test:coverage'
         build-command: 'npm run build:prod'
 ```
