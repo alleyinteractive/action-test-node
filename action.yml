@@ -24,11 +24,19 @@ inputs:
     description: 'Skip npm install'
     required: false
     default: 'false'
+  skip-install:
+    description: 'Skip npm install'
+    required: false
+    default: 'false'
   install-command:
     description: 'Command to run npm ci/install'
     required: false
     default: 'npm ci'
   audit-skip:
+    description: 'Skip npm audit'
+    required: false
+    default: 'false'
+  skip-audit:
     description: 'Skip npm audit'
     required: false
     default: 'false'
@@ -40,11 +48,19 @@ inputs:
     description: 'Skip tests'
     required: false
     default: 'false'
+  skip-test:
+    description: 'Skip tests'
+    required: false
+    default: 'false'
   test-command:
     description: 'Command to run tests'
     required: false
     default: 'npm test'
   build-skip:
+    description: 'Skip build'
+    required: false
+    default: 'false'
+  skip-build:
     description: 'Skip build'
     required: false
     default: 'false'
@@ -56,7 +72,15 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Setup environment variable for cache dependency path
+    - name: Set environment variables
+      run: |
+        echo "SKIP_INSTALL=$([ "${{ inputs.install-skip }}" = "true" ] || [ "${{ inputs.skip-install }}" = "true" ] && echo "true" || echo "false")" >> $GITHUB_ENV
+        echo "SKIP_AUDIT=$([ "${{ inputs.audit-skip }}" = "true" ] || [ "${{ inputs.skip-audit }}" = "true" ] && echo "true" || echo "false")" >> $GITHUB_ENV
+        echo "SKIP_TEST=$([ "${{ inputs.test-skip }}" = "true" ] || [ "${{ inputs.skip-test }}" = "true" ] && echo "true" || echo "false")" >> $GITHUB_ENV
+        echo "SKIP_BUILD=$([ "${{ inputs.build-skip }}" = "true" ] || [ "${{ inputs.skip-build }}" = "true" ] && echo "true" || echo "false")" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Setup cache dependency path environment variables
       run: |
         if [ "${{ inputs.working-directory }}" != "." ]; then
           echo "CACHE_DEPENDENCY_PATH=${{ inputs.working-directory }}/${{ inputs.cache-dependency-path }}" >> $GITHUB_ENV
@@ -77,25 +101,25 @@ runs:
       shell: bash
 
     - name: Run npm audit
-      if: ${{ inputs.audit-skip != 'true' }}
+      if: ${{ env.SKIP_AUDIT != 'true' }}
       run: ${{ inputs.audit-command }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
     - name: Install dependencies
-      if: ${{ inputs.install-skip != 'true' }}
+      if: ${{ env.SKIP_INSTALL != 'true' }}
       run: ${{ inputs.install-command }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
     - name: Run tests
-      if: ${{ inputs.test-skip != 'true' }}
+      if: ${{ env.SKIP_TEST != 'true' }}
       run: ${{ inputs.test-command }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
     - name: Run build
-      if: ${{ inputs.build-skip != 'true' }}
+      if: ${{ env.SKIP_BUILD != 'true' }}
       run: ${{ inputs.build-command }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}

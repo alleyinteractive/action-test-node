@@ -63,7 +63,7 @@ jobs:
 - Accepts a string.
 - Defaults to `package-lock.json`.
 
-### `audit-skip`
+### `audit-skip` or `skip-audit`
 
 - Determine whether to skip the npm audit step.
 - Accepts a boolean string (`'true'` or `'false'`).
@@ -75,7 +75,7 @@ jobs:
 - Accepts a string.
 - Defaults to `npm audit --audit-level=high --production`.
 
-### `install-skip`
+### `install-skip` or `skip-install`
 
 - Determine whether to skip the npm install step.
 - Accepts a boolean string (`'true'` or `'false'`).
@@ -87,7 +87,7 @@ jobs:
 - Accepts a string.
 - Defaults to `npm ci`.
 
-### `test-skip`
+### `test-skip` or `skip-test`
 
 - Determine whether to skip the test step.
 - Accepts a boolean string (`'true'` or `'false'`).
@@ -99,7 +99,7 @@ jobs:
 - Accepts a string.
 - Defaults to `npm test`.
 
-### `build-skip`
+### `build-skip` or `skip-build`
 
 - Determine whether to skip the build step.
 - Accepts a boolean string (`'true'` or `'false'`).
