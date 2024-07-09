@@ -25,7 +25,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Run Node Tests in src directory
-      uses: alleyinteractive/action-test-node@v1
+      uses: alleyinteractive/action-test-node@develop
       with:
         node: 'lts/*'
         working-directory: './src'
