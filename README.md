@@ -27,7 +27,7 @@ jobs:
     - name: Run Node Tests in src directory
       uses: alleyinteractive/action-test-node@develop
       with:
-        node: 'lts/*'
+        node-version: 'lts/*'
         working-directory: './src'
         audit-skip: 'true'
         test-command: 'npm run test:ci && npm run test:coverage'
