@@ -82,7 +82,7 @@ runs:
         echo "SKIP_AUDIT=$([ "${{ inputs.audit-skip }}" = "true" ] || [ "${{ inputs.skip-audit }}" = "true" ] && echo "true" || echo "false")" >> $GITHUB_ENV
         echo "SKIP_TEST=$([ "${{ inputs.test-skip }}" = "true" ] || [ "${{ inputs.skip-test }}" = "true" ] && echo "true" || echo "false")" >> $GITHUB_ENV
         echo "SKIP_BUILD=$([ "${{ inputs.build-skip }}" = "true" ] || [ "${{ inputs.skip-build }}" = "true" ] && echo "true" || echo "false")" >> $GITHUB_ENV
-        # If cache-node-modules is true and install-command is still the default, set install-command to check for node_modules
+        # If cache-node-modules is true and install-command is still the default, set install-command to skip npm ci if node_modules exists
         if [ "${{ inputs.cache-node-modules }}" = "true" ] && [ "${{ inputs.install-command }}" = "npm ci" ]; then
           echo 'INSTALL_COMMAND=if [ -d "node_modules" ]; then echo "Using cached node_modules"; else npm ci; fi' >> $GITHUB_ENV
         else
