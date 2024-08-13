@@ -63,6 +63,12 @@ jobs:
 - Accepts a string.
 - Defaults to `package-lock.json`.
 
+### `cache-node-modules`
+
+- Determine whether to cache the `node_modules` directory relative to the `working-directory`; note that setting this to 'true' adds logic to the default `install-command` to skip `npm ci` if the `node_modules` directory cache is restored. This will not override a custom `install-command`.
+- Accepts a boolean string (`'true'` or `'false'`).
+- Defaults to `'false'`.
+
 ### `audit-skip` or `skip-audit`
 
 - Determine whether to skip the npm audit step.
