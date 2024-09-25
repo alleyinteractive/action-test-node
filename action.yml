@@ -110,7 +110,8 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
-        cache-dependency-path: ${{ env.CACHE_DEPENDENCY_PATH }}
+        cache-dependency-path: ${{ inputs.cache-dependency-path }}
+        working-directory: ${{ inputs.working-directory }}
 
     - name: Install npm
       if: ${{ inputs.npm-version }}
