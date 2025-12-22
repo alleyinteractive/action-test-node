@@ -43,7 +43,7 @@ inputs:
   audit-command:
     description: 'Command to run npm audit'
     required: false
-    default: 'npm audit --audit-level=high --production'
+    default: 'npm audit --audit-level=high --omit=dev --package-lock-only'
   test-skip:
     description: 'Skip tests'
     required: false
