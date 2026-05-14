@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Run Node Tests in src directory
       uses: alleyinteractive/action-test-node@develop
