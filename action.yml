@@ -101,12 +101,12 @@ runs:
 
     - name: Cache node_modules
       if: ${{ inputs.cache-node-modules == 'true' }}
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ inputs.working-directory }}/node_modules
         key: ${{ runner.os }}-node_modules-${{ hashFiles( env.CACHE_DEPENDENCY_PATH ) }}
 
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
