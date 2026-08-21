@@ -91,7 +91,7 @@ jobs:
 
 - Specify the command to run for npm install.
 - Accepts a string.
-- Defaults to `npm ci`.
+- Defaults to `npm ci --prefer-offline --no-audit`.
 
 ### `test-skip` or `skip-test`
 
