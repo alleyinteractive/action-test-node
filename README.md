@@ -80,6 +80,7 @@ jobs:
 - Specify the command to run for npm audit.
 - Accepts a string.
 - Defaults to `npm audit --audit-level=high --production`.
+- Note: the default `install-command` includes `--no-audit`, which disables `npm ci`'s own implicit audit (which would otherwise cover devDependencies too). Combined with this step's default `--production`/`--omit=dev` flag, devDependencies are **not audited by default**. If you need devDependencies covered, override `audit-command` to drop `--production`/`--omit=dev`.
 
 ### `install-skip` or `skip-install`
 
@@ -92,6 +93,7 @@ jobs:
 - Specify the command to run for npm install.
 - Accepts a string.
 - Defaults to `npm ci --prefer-offline --no-audit`.
+- Note: `--no-audit` disables the audit that `npm ci` would otherwise run automatically as part of install. See `audit-command` below for how that affects devDependency coverage.
 
 ### `test-skip` or `skip-test`
 
