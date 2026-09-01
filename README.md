@@ -93,7 +93,7 @@ jobs:
 - Specify the command to run for npm install.
 - Accepts a string.
 - Defaults to `npm ci --prefer-offline --no-audit`.
-- Note: `--no-audit` disables the audit that `npm ci` would otherwise run automatically as part of install. See `audit-command` below for how that affects devDependency coverage.
+- Note: `--no-audit` disables the audit that `npm ci` would otherwise run automatically as part of install. See `audit-command` above for how that affects devDependency coverage.
 
 ### `test-skip` or `skip-test`
 
